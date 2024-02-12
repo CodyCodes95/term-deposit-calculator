@@ -13,11 +13,24 @@ const App = () => {
   const [investmentTerm, setInvestmentTerm] = useState(3);
   const [interestInterval, setInterestInterval] = useState<InterestPaidIntervalsType>("Monthly");
   const [finalBalance, setFinalBalance] = useState(0);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    setFinalBalance(
-      calculateInterest({ startDeposit: initialDeposit, interestRate, investmentTerm, interestPaid: interestInterval })
-    );
+    try {
+      setFinalBalance(
+        calculateInterest({
+          startDeposit: initialDeposit,
+          interestRate,
+          investmentTerm,
+          interestPaid: interestInterval,
+        })
+      );
+      setErrorMessage("");
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
+    }
   }, [initialDeposit, interestRate, investmentTerm, interestInterval]);
 
   return (
@@ -67,6 +80,7 @@ const App = () => {
             </select>
           </div>
         </div>
+        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
         <p className="font-bold">
           Final balace:{" "}
           {finalBalance.toLocaleString("en-AU", {
