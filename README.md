@@ -4,7 +4,7 @@
 
 The web app can be run via the deploy URL, or running the dev server using your package manager of choice. The built HTML/css/js is also provided under `./dist`
 
-Deployed URL:
+Deployed URL: https://term-deposit-calculator.vercel.app/
 
 To run local dev server:
 
