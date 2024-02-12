@@ -33,8 +33,7 @@ export const calculateInterest = ({
   const totalPeriods = investmentTerm * (interestPaidInterval || 1);
 
   for (let period = 0; period < totalPeriods; period++) {
-    // Calculate the interest for the current period and add it to the total deposit, or just add to the start deposit if interval is 0
-    // This isn't very clear, would like to make this more explicit.
+    // Calculate the interest for the current period and add it to the total deposit, or just add to the start deposit if interval is 0 (for at maturity)
     const interest =
       ((interestPaidInterval ? totalBalance : startDeposit) * (interestRate / 100)) / (interestPaidInterval || 1);
     totalBalance += interest;
