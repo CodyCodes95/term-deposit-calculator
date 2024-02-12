@@ -1,8 +1,8 @@
 // Exporting type to use on the front end
 export type InterestPaidIntervalsType = keyof typeof interestPaidIntervals;
 
-// Paid interest intervals with user friendly key names to use on front end.
-// This allows us to get the correct interval without a lot of condition checking.
+// Defines the intervals at which interest is paid in a user-friendly format for frontend use.
+// This structure simplifies the retrieval of interval values without extensive conditional checks.
 export const interestPaidIntervals = {
   Monthly: 12,
   Quarterly: 4,
@@ -19,10 +19,10 @@ type CalculateInterestParameters = {
 };
 
 export const calculateInterest = ({
-  startDeposit,
-  investmentTerm,
-  interestRate,
-  interestPaid,
+  startDeposit, // Starting investment
+  investmentTerm, // Annual interest rate in percentage
+  interestRate, // Duration of the investment in years
+  interestPaid, // Interval at which interest is paid
 }: CalculateInterestParameters) => {
   // Validate the input
   validateCalculatorInput({ startDeposit, investmentTerm, interestRate, interestPaid });
@@ -44,6 +44,8 @@ export const calculateInterest = ({
 
 // Used to validate the calculator input at runtime
 const validateCalculatorInput = (input: CalculateInterestParameters) => {
+  // Each validation step checks for correct type and logical value
+
   // Start deposit validation
   if (typeof input.startDeposit !== "number") {
     throw new Error("Start deposit must be a number");
