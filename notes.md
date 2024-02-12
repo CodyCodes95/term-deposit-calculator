@@ -20,7 +20,8 @@ What requirements could change that I should consider?
 - Different intervals that interest can be paid in
 - Option to view total without reinvesting proceeds
 - Allowing extra deposits to be entered
-- What outputs are displayed to the end user? (final balance, total interest earned etc.)
+- What outputs are displayed to the end user (final balance, total interest earned etc.)
+- Displaying a historic analysis of interest earned across the duration of the investment
 
 Considerations:
 
