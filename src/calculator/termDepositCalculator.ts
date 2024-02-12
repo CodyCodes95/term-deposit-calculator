@@ -24,22 +24,18 @@ export const calculateInterest = ({
   interestRate,
   interestPaid,
 }: CalculateInterestParameters) => {
-  let totalDeposit = startDeposit;
+  let totalBalance = startDeposit;
   //   Grab the interval from the interestPaidIntervals object.
   const interestPaidInterval = interestPaidIntervals[interestPaid];
-  //   Calculate the total periods the interest will be paid.
-  const totalPeriods = investmentTerm * interestPaidInterval;
+  //   Calculate the total periods the interest will be paid, fallback to one if intervals are 0 (maturity)
+  const totalPeriods = investmentTerm * (interestPaidInterval || 1);
 
-  // If the interest is paid at maturity, we can just calculate the interest once.
-  if (interestPaidInterval === 0) {
-    totalDeposit *= 1 + interestRate / 100;
-  } else {
-    // Otherwise, we calculate the interest for each period.
-    for (let period = 0; period < totalPeriods; period++) {
-      // Calculate the interest for the current period and add it to the total deposit.
-      const interest = (totalDeposit * (interestRate / 100)) / interestPaidInterval;
-      totalDeposit += interest;
-    }
+  for (let period = 0; period < totalPeriods; period++) {
+    // Calculate the interest for the current period and add it to the total deposit, or just add to the start deposit if interval is 0
+    const interest =
+      ((interestPaidInterval ? totalBalance : startDeposit) * (interestRate / 100)) / (interestPaidInterval || 1);
+    totalBalance += interest;
   }
-  return totalDeposit;
+
+  return totalBalance;
 };
