@@ -81,14 +81,24 @@ const App = () => {
           </div>
         </div>
         {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-        <p className="font-bold">
-          Final balace:{" "}
-          {finalBalance.toLocaleString("en-AU", {
-            style: "currency",
-            currency: "AUD",
-            maximumFractionDigits: 0,
-          })}
-        </p>
+        <div className="flex flex-col gap-2">
+          <p className="font-bold">
+            Final balace:{" "}
+            {finalBalance.toLocaleString("en-AU", {
+              style: "currency",
+              currency: "AUD",
+              maximumFractionDigits: 0,
+            })}
+          </p>
+          <p>
+            Total interest earned:{" "}
+            {(finalBalance - initialDeposit).toLocaleString("en-AU", {
+              style: "currency",
+              currency: "AUD",
+              maximumFractionDigits: 0,
+            })}
+          </p>
+        </div>
       </main>
       <footer className="flex w-full justify-center mt-auto">
         <a href="https://github.com/CodyCodes95/term-deposit-calculator">Github</a>
