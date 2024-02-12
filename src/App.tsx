@@ -1,4 +1,9 @@
 import { useEffect, useState } from "react";
+import {
+  InterestPaidIntervalsType,
+  calculateInterest,
+  interestPaidIntervals,
+} from "./calculator/termDepositCalculator";
 
 const App = () => {
   // Initialise state with example default values
@@ -6,11 +11,13 @@ const App = () => {
   const [initialDeposit, setInitialDeposit] = useState(10000);
   const [interestRate, setInterestRate] = useState(1.1);
   const [investmentTerm, setInvestmentTerm] = useState(3);
-  const [interestInterval, setInterestInterval] = useState("monthly");
+  const [interestInterval, setInterestInterval] = useState<InterestPaidIntervalsType>("Monthly");
   const [finalBalance, setFinalBalance] = useState(0);
 
   useEffect(() => {
-    // setFinalBalance(...)
+    setFinalBalance(
+      calculateInterest({ startDeposit: initialDeposit, interestRate, investmentTerm, interestPaid: interestInterval })
+    );
   }, [initialDeposit, interestRate, investmentTerm, interestInterval]);
 
   return (
@@ -37,7 +44,7 @@ const App = () => {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="deposit">Investment term</label>
+            <label htmlFor="deposit">Investment term (years)</label>
             <input
               type="number"
               name="deposit"
@@ -49,13 +56,24 @@ const App = () => {
             <label htmlFor="paymentInterval">Interest Paid</label>
             <select
               value={interestInterval}
-              onChange={(e) => setInterestInterval(e.target.value)}
+              onChange={(e) => setInterestInterval(e.target.value as InterestPaidIntervalsType)}
               name="paymentInterval"
-            ></select>
+            >
+              {Object.keys(interestPaidIntervals).map((interval) => (
+                <option key={interval} value={interval}>
+                  {interval}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
         <p className="font-bold">
-          Final balace: <span>{finalBalance.toFixed()}</span>
+          Final balace:{" "}
+          {finalBalance.toLocaleString("en-AU", {
+            style: "currency",
+            currency: "AUD",
+            maximumFractionDigits: 0,
+          })}
         </p>
       </main>
       <footer className="flex w-full justify-center mt-auto">
