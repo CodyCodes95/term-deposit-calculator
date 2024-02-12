@@ -1,4 +1,4 @@
-# Term Depsoit Calculator Notes
+# Term Deposit Calculator Notes
 
 ## Requirements
 

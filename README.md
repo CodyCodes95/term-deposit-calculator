@@ -1,17 +1,37 @@
-# Term Depsoit Calculator
+# Term Deposit Calculator
+
+## Live demo
+
+Check out the term deposit calculator here: https://term-deposit-calculator.vercel.app/
 
 ## How to run
 
-The web app can be run via the deploy URL, or running the dev server using your Javascript package manager of choice. The built HTML/css/js is also provided under `./dist`
+### Prerequisites
 
-Deployed URL: https://term-deposit-calculator.vercel.app/
+Ensure you have Node.js and npm installed on your machine to run the project locally.
 
-To run local dev server:
+### Installation
 
-`npm run dev`
+1. Clone the repository to your machine:
+
+`git clone https://github.com/CodyCodes95/term-deposit-calculator.git`
+
+2. Navigate into the project directory:
+
+`cd term-deposit-calculator`
+
+3. Install required dependencies:
+
+`npm install`
+
+4. Run the application
+
+`npm start`
 
 ## Tests
 
+All tests are found under src/calculator/tests
+
 To run tests:
 
-`npm run test`
+`npm test`
