@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { calculateInterest } from "../termDepositCalculator";
 
 describe("Term Deposit Interest Calculator", () => {
+  // calculates values correctly
   it("calculates interest correctly for monthly payments", () => {
     const totalBalance = calculateInterest({
       startDeposit: 10000,
@@ -42,35 +43,38 @@ describe("Term Deposit Interest Calculator", () => {
     expect(totalBalance).toBe("11500");
   });
 
-  //   it("calculates interest correctly for annual payments", () => {
-  //     const totalBalance = calculateInterest({
-  //       startDeposit: 10000,
-  //       interestRate: 5,
-  //       investmentTerm: 3,
-  //       interestPaid: "Monthly",
-  //     });
-  //     expect(result).toBeCloseTo(16320, 2);
-  //   });
+  // Validates user input
 
-  //   it("calculates interest correctly at maturity", () => {
-  //     const totalBalance = calculateInterest({
-  //       startDeposit: 10000,
-  //       interestRate: 5,
-  //       investmentTerm: 3,
-  //       interestPaid: "Monthly",
-  //     });
-  //     expect(result).toBeCloseTo(20500, 2);
-  //   });
+  it("throws an error if the interest rate is negative", () => {
+    expect(() =>
+      calculateInterest({
+        startDeposit: 10000,
+        interestRate: -5,
+        investmentTerm: 3,
+        interestPaid: "Monthly",
+      })
+    ).toThrow("Interest rate must be greater than 0");
+  });
 
-  //   it("handles zero interest rate", () => {
-  //     const totalBalance = calculateInterest({
-  //       startDeposit: 10000,
-  //       interestRate: 5,
-  //       investmentTerm: 3,
-  //       interestPaid: "Monthly",
-  //     });
-  //     expect(result).toBeCloseTo(10000, 2);
-  //   });
+  it("throws an error if the start deposit is negative", () => {
+    expect(() =>
+      calculateInterest({
+        startDeposit: -10000,
+        interestRate: 5,
+        investmentTerm: 3,
+        interestPaid: "Monthly",
+      })
+    ).toThrow("Start deposit must be greater than 0");
+  });
 
-  // Add more tests as needed to cover edge cases and other scenarios
+  it("throws an error if the investment term is negative", () => {
+    expect(() =>
+      calculateInterest({
+        startDeposit: 10000,
+        interestRate: 5,
+        investmentTerm: -3,
+        interestPaid: "Monthly",
+      })
+    ).toThrow("Investment term must be greater than 0");
+  });
 });
